@@ -1,7 +1,7 @@
 # Bench Power Supply
 
 ## Overview
-A mains-powered, adjustable bench power supply designed in KiCad, converting 120V AC wall input into a regulated 2–5V DC output. The design integrates real-time voltage/current monitoring and follows mains electrical safety practices for isolating AC and low-voltage DC domains. The complete unit was built for approximately $75 in components — roughly 50% less than similarly-specced commercial digital bench supplies ($130–$200 retail).
+A mains-powered, adjustable bench power supply designed in KiCad, converting 120V AC wall input into a regulated 1–30V DC output. The design integrates real-time voltage/current monitoring and follows mains electrical safety practices for isolating AC and low-voltage DC domains. The complete unit was built for approximately $75 in components — roughly 50% less than similarly-specced commercial digital bench supplies ($130–$200 retail).
 
 ## Objectives
 - Design a safe, mains-powered adjustable DC power supply from raw 120V AC input
