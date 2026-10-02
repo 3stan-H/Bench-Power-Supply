@@ -32,7 +32,7 @@ IEC Inlet → Fuse → Transformer → Bridge Rectifier → XL4016 Buck Converte
 - **Voltage Regulation**: The XL4016 buck converter's feedback pin is tuned via a potentiometer/resistor-divider network, giving real-time output adjustment in 0.01V steps across the 1–20V range.
 - **Monitoring**: An INA219 current-sensing IC feeds live voltage and current data to an Arduino Nano, which drives an LCD display accurate to 0.01V/0.01A for real-time monitoring during use.
 - **Mains Safety**: The chassis (earth) ground is isolated from the circuit's PCB ground rail at the IEC inlet, protecting against electrical shock hazards. AC-safety and low-voltage DC routing are kept physically separated on the PCB layout.
-- **Cost**: Total build cost was approximately $75 in components, roughly 50% less than similarly-specced commercial digital bench power supplies (typically $130–$200 retail).
+- **Cost**: Total build cost was approximately $90 in components, roughly 50% less than similarly-specced commercial digital bench power supplies (typically $130–$200 retail).
 
 ## Status
 Designed, laid out, and built as a complete working unit — power regulation, voltage adjustment, and live voltage/current monitoring were all implemented and verified in the final build.
