@@ -1,0 +1,64 @@
+#include <Wire.h>
+#include <LiquidCrystal.h>
+#include <Adafruit_INA219.h>
+
+// LCD pins: RS, E, D4, D5, D6, D7
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+Adafruit_INA219 ina219;
+
+// Voltage divider values
+const float R_upper = 47000.0; // 47k
+const float R_lower = 10000.0; // 10k
+const float VREF = 5.0;        // Arduino reference voltage
+
+void setup() {
+  lcd.begin(16, 2);
+  
+  // Initialize INA219
+  if (!ina219.begin()) {
+    lcd.setCursor(0, 0);
+    lcd.print("INA219 Error!");
+    while (1);
+  }
+  
+  // Startup message
+  lcd.setCursor(0, 0);
+  lcd.print("  Bench PSU  ");
+  lcd.setCursor(0, 1);
+  lcd.print(" Initializing..");
+  delay(2000);
+  lcd.clear();
+}
+
+void loop() {
+  // Read voltage from divider on A0
+  int raw = analogRead(A0);
+  float measuredVoltage = (raw / 1023.0) * VREF * ((R_upper + R_lower) / R_lower);
+
+  // Read current from INA219
+  float current_mA = ina219.getCurrent_mA();
+  float current_A = current_mA / 1000.0;
+  
+  // Clamp negatives to zero
+  if (current_A < 0) current_A = 0;
+  if (measuredVoltage < 0) measuredVoltage = 0;
+
+  // Display voltage on line 1
+  lcd.setCursor(0, 0);
+  lcd.print("V: ");
+  lcd.print(measuredVoltage, 2);
+  lcd.print("V      ");
+
+  // Display current on line 2
+  lcd.setCursor(0, 1);
+  lcd.print("I: ");
+  if (current_A < 1.0) {
+    lcd.print(current_mA, 0);
+    lcd.print("mA     ");
+  } else {
+    lcd.print(current_A, 3);
+    lcd.print("A      ");
+  }
+
+  delay(300);
+}
